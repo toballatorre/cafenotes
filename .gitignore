@@ -1,0 +1,26 @@
+# === Global ignores for monorepo ===
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Docker
+.docker/
+docker-compose.override.yml
+volumes/
+tmp/
+
+# Logs
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Archives
+*.zip
+*.tar
+*.tgz
