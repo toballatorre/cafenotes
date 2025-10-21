@@ -43,10 +43,10 @@ Backend API: http://localhost:4000
 ### Phase 1: Project Setup & Docker
 - [x] Create backend project (NestJS) → Hello World
 - [x] Create frontend project (Next.js) → Hello World
-- [ ] Prepare Backend Dockerfile
-    - [ ] Install dependencies
-    - [ ] Compile TypeScript
-    - [ ] Expose backend port
+- [x] Prepare Backend Dockerfile
+    - [x] Install dependencies
+    - [x] Compile TypeScript
+    - [x] Expose backend port
 - [ ] Prepare Frontend Dockerfile
     - [ ] Install dependencies
     - [ ] Build Next.js production

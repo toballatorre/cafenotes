@@ -20,7 +20,7 @@ RUN pnpm install
 COPY . .
 
 # Exponer puerto para la aplicación y debugging
-EXPOSE 3000 9229
+EXPOSE 4000 9229
 
 # Comando por defecto (se puede sobrescribir en docker-compose)
 CMD ["pnpm", "run", "start:dev"]

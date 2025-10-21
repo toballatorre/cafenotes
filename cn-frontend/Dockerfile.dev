@@ -1,0 +1,23 @@
+# Dockerfile para desarrollo con Next.js
+FROM node:20-alpine
+
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Instalar dependencias del sistema necesarias
+RUN apk add --no-cache git libc6-compat
+
+# Copiar package.json para instalar dependencias
+COPY package.json ./
+
+# Instalar dependencias
+RUN npm install
+
+# Copiar el resto del código fuente (esto se monta como volumen en desarrollo)
+COPY . .
+
+# Exponer puerto para la aplicación Next.js
+EXPOSE 3000
+
+# Comando por defecto - Next.js en modo desarrollo con host 0.0.0.0
+CMD ["npm", "run", "dev", "--", "--hostname", "0.0.0.0"]
