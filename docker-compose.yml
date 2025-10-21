@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16
+    container_name: coffeenotes_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - coffeenotes_network
+
+  backend:
+    build:
+      context: ./cn-backend
+      dockerfile: Dockerfile.dev
+    container_name: coffeenotes_backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "9229:9229"  # Puerto para debugging
+    volumes:
+      - ./cn-backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    depends_on:
+      - db
+    networks:
+      - coffeenotes_network
+    command: pnpm run start:dev
+
+volumes:
+  postgres_data:
+
+networks:
+  coffeenotes_network:

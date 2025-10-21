@@ -1,0 +1,26 @@
+# Dockerfile para desarrollo con NestJS
+FROM node:20-alpine
+
+# Instalar pnpm globalmente
+RUN npm install -g pnpm
+
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Instalar dependencias del sistema necesarias
+RUN apk add --no-cache git
+
+# Copiar package.json y pnpm-lock.yaml para instalar dependencias
+COPY package.json pnpm-lock.yaml ./
+
+# Instalar dependencias
+RUN pnpm install
+
+# Copiar el resto del código fuente (esto se monta como volumen en desarrollo)
+COPY . .
+
+# Exponer puerto para la aplicación y debugging
+EXPOSE 3000 9229
+
+# Comando por defecto (se puede sobrescribir en docker-compose)
+CMD ["pnpm", "run", "start:dev"]
